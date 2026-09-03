@@ -1,0 +1,321 @@
+---
+/**
+ * A grade do curso. Todos os tópicos ficam visíveis no HTML — nada escondido
+ * atrás de acordeão ou de clique, para que o buscador leia a grade inteira.
+ */
+import {
+  publicoAlvo,
+  resultadosDeAprendizagem,
+  modulos,
+  preRequisitos,
+  vertical,
+} from '../data/conteudo';
+import Seta from './Seta.astro';
+---
+
+<section class="section" id="a-grade" aria-labelledby="titulo-grade">
+  <div class="wrap">
+    <p class="eyebrow">A grade</p>
+    <h2 id="titulo-grade">O que você aprende, módulo a módulo</h2>
+
+    <!-- Estrutura do produto: um núcleo reaproveitado por várias verticais. -->
+    <div class="diagrama" role="group" aria-label="Estrutura do curso">
+      <div class="caixa caixa--nucleo">
+        <span class="caixa__rotulo mono">base</span>
+        <p>Núcleo comum</p>
+      </div>
+
+      <div class="conector">
+        <span class="hand">especifica-se em</span>
+        <span class="seta-h"><Seta variante="curta" largura="72px" cor="var(--ink-2)" /></span>
+      </div>
+
+      <div class="caixa caixa--vertical">
+        <span class="caixa__rotulo mono">vertical</span>
+        <p>Setor público</p>
+      </div>
+
+      <div class="conector conector--simples">
+        <span class="seta-h"><Seta variante="curta" largura="72px" cor="var(--ink-2)" /></span>
+      </div>
+
+      <div class="destinos">
+        <div class="caixa caixa--pequena"><p>Prefeituras</p></div>
+        <div class="caixa caixa--pequena"><p>Câmaras municipais</p></div>
+      </div>
+    </div>
+
+    <div class="colunas">
+      <div class="sketch bloco">
+        <h3>Para quem é</h3>
+        <p>{publicoAlvo}</p>
+      </div>
+
+      <div class="sketch bloco">
+        <h3>Ao final, você é capaz de</h3>
+        <ul class="list-check">
+          {resultadosDeAprendizagem.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="subtitulo">Núcleo comum — 6 módulos</h3>
+
+    <ol class="modulos">
+      {
+        modulos.map((modulo) => (
+          <li class="modulo">
+            <div class="modulo__cabeca">
+              <span class="modulo__numero" aria-hidden="true">
+                {String(modulo.numero).padStart(2, '0')}
+              </span>
+              <h4 class="modulo__titulo">
+                <span class="visually-hidden">Módulo {modulo.numero}: </span>
+                {modulo.titulo}
+              </h4>
+            </div>
+            <p class="modulo__objetivo">{modulo.objetivo}</p>
+            <ul class="list-dash">
+              {modulo.topicos.map((topico) => <li>{topico}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="rodape-grade">
+      <div class="sketch bloco">
+        <h3>{vertical.titulo}</h3>
+        <p class="muted">{vertical.resumo}</p>
+        <ul class="list-dash">
+          {vertical.modulos.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="bloco">
+        <h3>Pré-requisitos</h3>
+        <ul class="list-dash">
+          {preRequisitos.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="hand carga">
+          Carga estimada: 8 a 12 horas no núcleo comum, outro tanto na vertical.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---------------- Diagrama ---------------- */
+
+  .diagrama {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1rem;
+    margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+  }
+
+  .caixa {
+    background: var(--note);
+    border: 2px solid var(--ink);
+    padding: 0.85rem 1.1rem;
+    min-width: 9.5rem;
+    box-shadow: 3px 4px 0 rgba(34, 31, 27, 0.1);
+    transform: rotate(-0.7deg);
+  }
+
+  .caixa p {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .caixa__rotulo {
+    display: block;
+    color: rgba(34, 31, 27, 0.55);
+    margin-bottom: 0.15rem;
+  }
+
+  .caixa--vertical {
+    transform: rotate(0.8deg);
+  }
+
+  .caixa--pequena {
+    background: var(--paper-soft);
+    min-width: 8rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .destinos {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .conector {
+    display: grid;
+    justify-items: center;
+    gap: 0.1rem;
+    color: var(--ink-3);
+  }
+
+  .conector .hand {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  .conector--simples {
+    padding-top: 0.2rem;
+  }
+
+  .seta-h {
+    display: block;
+  }
+
+  @media (max-width: 46rem) {
+    .diagrama {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .seta-h {
+      transform: rotate(90deg);
+    }
+    .conector {
+      justify-items: start;
+      grid-auto-flow: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+  }
+
+  /* ---------------- Blocos ---------------- */
+
+  .colunas {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+  }
+
+  @media (min-width: 52rem) {
+    .colunas {
+      grid-template-columns: 1fr 1.2fr;
+      align-items: start;
+    }
+  }
+
+  .bloco h3 {
+    margin-top: 0;
+    font-size: 1.15rem;
+  }
+
+  .bloco p:last-child {
+    margin-bottom: 0;
+  }
+
+  .subtitulo {
+    font-family: var(--hand);
+    font-size: 2rem;
+    color: var(--ink-2);
+    transform: rotate(-0.6deg);
+    transform-origin: left;
+    margin-bottom: 1.4rem;
+  }
+
+  /* ---------------- Módulos ---------------- */
+
+  .modulos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 54rem) {
+    .modulos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .modulo {
+    background: rgba(255, 255, 255, 0.55);
+    border: 2px solid var(--ink);
+    border-radius: 3px;
+    padding: 1.4rem 1.5rem 1.6rem;
+    position: relative;
+  }
+
+  .modulo::after {
+    content: '';
+    position: absolute;
+    inset: 5px 4px 6px 5px;
+    border: 1px solid var(--pencil);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .modulo:nth-child(odd) {
+    transform: rotate(-0.3deg);
+  }
+
+  .modulo:nth-child(even) {
+    transform: rotate(0.3deg);
+  }
+
+  .modulo__cabeca {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modulo__numero {
+    font-family: var(--hand);
+    font-size: 2.1rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .modulo__titulo {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.2;
+  }
+
+  .modulo__objetivo {
+    margin: 0 0 0.9rem;
+    color: var(--ink-3);
+    font-size: 0.97em;
+    font-style: italic;
+  }
+
+  /* ---------------- Rodapé da grade ---------------- */
+
+  .rodape-grade {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 52rem) {
+    .rodape-grade {
+      grid-template-columns: 1.4fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .carga {
+    color: var(--accent);
+    margin-top: 1rem;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

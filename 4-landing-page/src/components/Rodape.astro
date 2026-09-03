@@ -1,0 +1,98 @@
+---
+import { marca, navegacao, acoes } from '../config/site';
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="wrap conteudo">
+    <div>
+      <p class="marca">{marca.nome}</p>
+      <p class="hand frase">Você escreve o que sabe. A IA dá forma. Você revisa e assina.</p>
+    </div>
+
+    <nav class="links no-print" aria-label="Navegação do rodapé">
+      {navegacao.map((item) => <a href={item.href}>{item.rotulo}</a>)}
+      <a href="#a-grade">A grade</a>
+      <a href="#o-valor">O valor</a>
+      <a href="#perguntas">Perguntas</a>
+    </nav>
+
+    <div class="contato">
+      <p class="mono">Órgãos públicos com necessidade de empenho e nota fiscal:</p>
+      <a class="btn btn--ghost no-print" href={acoes.contatoOrgaoPublico}>Falar sobre contratação</a>
+    </div>
+  </div>
+
+  <div class="wrap creditos">
+    <p>© {ano} {marca.nome}. Todos os direitos reservados.</p>
+    <p class="muted">Conteúdo produzido por {marca.autor}.</p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    border-top: 2px solid var(--ink);
+    background: rgba(233, 228, 216, 0.6);
+    padding-block: clamp(2.5rem, 1.5rem + 3vw, 3.5rem) 1.75rem;
+  }
+
+  .conteudo {
+    display: grid;
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  @media (min-width: 52rem) {
+    .conteudo {
+      grid-template-columns: 1.3fr 0.7fr 1fr;
+    }
+  }
+
+  .marca {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+  }
+
+  .frase {
+    margin: 0;
+    color: var(--accent);
+    max-width: 30ch;
+  }
+
+  .links {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.98rem;
+  }
+
+  .links a {
+    text-decoration: none;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+  }
+
+  .links a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .contato p {
+    margin: 0 0 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .creditos {
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed rgba(34, 31, 27, 0.25);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .creditos p {
+    margin: 0;
+  }
+</style>

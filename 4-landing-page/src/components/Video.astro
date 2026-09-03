@@ -1,0 +1,133 @@
+---
+/**
+ * Seção de vídeo. Enquanto `video.embedUrl` estiver vazio em src/config/site.ts,
+ * exibe uma moldura de espaço reservado. O resumo em texto fica sempre visível:
+ * buscador não assiste a vídeo, mas lê o que está escrito ao lado dele.
+ */
+import { video } from '../config/site';
+---
+
+<section class="section section--sheet" id="o-video" aria-labelledby="titulo-video">
+  <div class="wrap">
+    <p class="eyebrow">Em três minutos</p>
+    <h2 id="titulo-video">{video.titulo}</h2>
+
+    <div class="conteudo">
+      <div class="moldura">
+        {
+          video.embedUrl ? (
+            <iframe
+              src={video.embedUrl}
+              title={video.titulo}
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowfullscreen
+            />
+          ) : (
+            <div class="reserva">
+              <span class="play" aria-hidden="true" />
+              <p class="hand">espaço reservado para o vídeo</p>
+              <p class="mono dica">
+                cole a URL de incorporação em <code>src/config/site.ts → video.embedUrl</code>
+              </p>
+            </div>
+          )
+        }
+      </div>
+
+      <div class="resumo">
+        <p>{video.resumo}</p>
+        <p class="muted mono">
+          O vídeo é um resumo. Todo o conteúdo do método está descrito em texto nesta
+          página, seção por seção.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .conteudo {
+    display: grid;
+    gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+    align-items: center;
+  }
+
+  @media (min-width: 60rem) {
+    .conteudo {
+      grid-template-columns: 1.6fr 1fr;
+    }
+  }
+
+  .moldura {
+    position: relative;
+    border: 2px solid var(--ink);
+    border-radius: 3px;
+    background: var(--paper-deep);
+    padding: 0.55rem;
+    transform: rotate(-0.4deg);
+    box-shadow: 4px 5px 0 rgba(34, 31, 27, 0.12);
+  }
+
+  .moldura::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--pencil);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .moldura :global(iframe),
+  .reserva {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: rgba(34, 31, 27, 0.06);
+  }
+
+  .reserva {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.35rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .play {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    position: relative;
+    opacity: 0.65;
+  }
+
+  .play::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-left: 1.1rem solid var(--ink);
+    border-top: 0.7rem solid transparent;
+    border-bottom: 0.7rem solid transparent;
+  }
+
+  .dica {
+    color: var(--ink-3);
+    max-width: 30ch;
+  }
+
+  .dica code {
+    background: rgba(34, 31, 27, 0.07);
+    padding: 0.1em 0.35em;
+  }
+
+  .resumo p:first-child {
+    font-size: 1.08em;
+  }
+</style>

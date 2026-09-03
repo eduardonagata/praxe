@@ -1,0 +1,111 @@
+---
+/**
+ * Cabeçalho fixo: nome provisório da marca à esquerda, os dois destinos à
+ * direita. "O curso" vem primeiro por ser a oferta principal.
+ */
+import { marca, navegacao } from '../config/site';
+---
+
+<header class="cabecalho no-print">
+  <div class="wrap barra">
+    <a class="logo" href="#topo">
+      <span class="logo__nome">{marca.nome}</span>
+      <span class="logo__assinatura">{marca.assinatura}</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      {
+        navegacao.map((item, i) => (
+          <>
+            {i > 0 && <span class="separador" aria-hidden="true">|</span>}
+            <a class="nav__link" href={item.href}>{item.rotulo}</a>
+          </>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(243, 240, 232, 0.88);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .barra {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.85rem;
+  }
+
+  .logo {
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+
+  .logo__nome {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  /* Sublinhado a lápis sob o nome da marca. */
+  .logo__nome::after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 1px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.85;
+    transform: rotate(-0.6deg);
+  }
+
+  .logo__assinatura {
+    font-family: var(--hand);
+    font-size: 1.15rem;
+    color: var(--ink-3);
+  }
+
+  .nav {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .nav__link {
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav__link:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .separador {
+    color: var(--pencil);
+  }
+
+  @media (max-width: 30rem) {
+    .logo__assinatura {
+      display: none;
+    }
+    .barra {
+      gap: 0.5rem;
+    }
+    .nav {
+      font-size: 0.95rem;
+    }
+  }
+</style>

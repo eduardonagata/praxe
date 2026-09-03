@@ -64,7 +64,7 @@ O treinamento é estruturado em duas partes, comercializáveis em conjunto ou se
 
 **Núcleo comum.** Método de produção, revisão e formatação de documentos formais com IA generativa, aplicável a qualquer área de atuação. Cobre fundamentos práticos da ferramenta, estruturação de instruções, revisão iterativa por comparação de versões, formatação automatizada com identidade institucional, segurança da informação e responsabilidade humana pela validação do resultado. É agnóstico a setor e tipo de documento.
 
-["Conteúdo programático do núcleo comum"](3-curso-redacao-tecnica-producao-documental-assistida-por-ia/1-nucleo-comum-producao-documental-ia-generativa.md)
+["Conteúdo programático do núcleo comum"](3-curso-redacao-tecnica-producao-documental-assistida-por-ia/2-nucleo-comum-producao-documental-ia-generativa.md)
 
 **Vertical de aplicação.** Adaptação do núcleo a um contexto específico, com vocabulário, exemplos e exigências próprias daquele ambiente. A primeira vertical desenvolvida é a de órgãos públicos, cobrindo redação oficial, documentos de contratação (ETP, termo de referência), documentos do processo administrativo e legislativo, governança e LGPD aplicadas ao setor, e aquisição e gestão do serviço de IA por ente público. Verticais adicionais — jurídica, contábil, técnica — reutilizam o mesmo núcleo sem alteração.
 
@@ -72,7 +72,7 @@ Essa separação permite produzir o núcleo uma única vez e reaproveitá-lo int
 
 Estuda-se também a possibilidade da vertical de aplicação ser uma adaptação do conteúdo do núcleo comum, pois o conteúdo comum genérico sozinho sem uma aplicação concreta pode gerar pouco engajamento. Uma ideia para endereçar essa questão é desenvolver o núcleo comum e ramifica-lo para cada vertical com adaptações para cada uma.
 
-Ver ["Conteúdo programático do núcleo comum adaptado para o setor público"](3-curso-redacao-tecnica-producao-documental-assistida-por-ia/2-vertical-setor-publico.md)
+Ver ["Conteúdo programático do núcleo comum adaptado para o setor público"](3-curso-redacao-tecnica-producao-documental-assistida-por-ia/3-vertical-setor-publico.md)
 
 ## 2. Seções a desenvolver
 

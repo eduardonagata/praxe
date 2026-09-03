@@ -1,0 +1,427 @@
+/* ==========================================================================
+   Sistema visual: papel, lápis e post-it.
+   Referência: o quadro de planejamento feito no Freeform — fundo pontilhado,
+   molduras tortas, setas desenhadas à mão e notas amarelas.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Papel */
+  --paper: #f3f0e8;
+  --paper-soft: #f8f6f0;
+  --paper-deep: #e9e4d8;
+
+  /* Grafite */
+  --ink: #221f1b;
+  --ink-2: #4b463e;
+  --ink-3: #6e6960;
+  --pencil: #9b958a;
+  --line: #cec8b9;
+
+  /* Post-it */
+  --note: #fae389;
+  --note-deep: #f4d461;
+
+  /* Marcação */
+  --accent: #bd4f2c;
+  --accent-soft: #f0d3c6;
+
+  --max: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  --serif: 'Source Serif 4', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --hand: 'Caveat', 'Bradley Hand', 'Segoe Script', cursive;
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.1875rem);
+  line-height: 1.62;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* Malha pontilhada do quadro de planejamento. */
+  background-image: radial-gradient(rgba(34, 31, 27, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.6em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 1.4rem + 3.4vw, 3.9rem);
+}
+h2 {
+  font-size: clamp(1.7rem, 1.25rem + 2.1vw, 2.7rem);
+}
+h3 {
+  font-size: clamp(1.2rem, 1.08rem + 0.6vw, 1.45rem);
+}
+
+p {
+  margin: 0 0 1.1em;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Estrutura
+   -------------------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.wrap--narrow {
+  max-width: 46rem;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 2rem + 6vw, 7rem);
+  position: relative;
+}
+
+/* Alterna a "folha" para separar visualmente as seções sem cortar o papel. */
+.section--sheet {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 246, 240, 0) 0%,
+    rgba(248, 246, 240, 0.75) 8%,
+    rgba(248, 246, 240, 0.75) 92%,
+    rgba(248, 246, 240, 0) 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Tipografia auxiliar
+   -------------------------------------------------------------------------- */
+
+.eyebrow {
+  font-family: var(--hand);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--accent);
+  margin: 0 0 0.35em;
+  transform: rotate(-1.2deg);
+  transform-origin: left center;
+}
+
+.hand {
+  font-family: var(--hand);
+  font-size: 1.35em;
+  line-height: 1.25;
+  color: var(--ink-2);
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: 1.15em;
+  color: var(--ink-2);
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+/* Grifo a lápis sob uma palavra-chave. */
+.mark {
+  background-image: linear-gradient(
+    180deg,
+    transparent 62%,
+    var(--note) 62%,
+    var(--note) 94%,
+    transparent 94%
+  );
+  padding-inline: 0.1em;
+}
+
+/* --------------------------------------------------------------------------
+   Molduras desenhadas à mão
+   -------------------------------------------------------------------------- */
+
+/* Moldura reta e levemente torta — os contêineres grandes do quadro. */
+.frame {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
+}
+
+.frame::after {
+  content: '';
+  position: absolute;
+  inset: 5px 4px 6px 5px;
+  border: 1px solid var(--pencil);
+  border-radius: 3px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.frame--tilt {
+  transform: rotate(-0.35deg);
+}
+
+/* Caixa com traço trêmulo — cartões menores. */
+.sketch {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: 255px 12px 225px 14px / 14px 225px 12px 255px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 1.35rem 1.5rem;
+}
+
+.sketch::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1.5px solid var(--pencil);
+  border-radius: 14px 225px 12px 255px / 225px 12px 255px 14px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Post-it. */
+.note {
+  position: relative;
+  background: var(--note);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(0, 0, 0, 0.04));
+  padding: 1.25rem 1.35rem 1.5rem;
+  box-shadow:
+    3px 4px 0 rgba(34, 31, 27, 0.09),
+    0 12px 20px -14px rgba(34, 31, 27, 0.5);
+  transform: rotate(-0.9deg);
+  transition: transform 0.18s ease;
+}
+
+.note:nth-child(2n) {
+  transform: rotate(0.85deg);
+  background: var(--note-deep);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.04));
+}
+
+.note:nth-child(3n) {
+  transform: rotate(-1.6deg);
+}
+
+.note:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+/* Linha divisória a lápis. */
+.rule {
+  border: 0;
+  height: 6px;
+  margin: 2.5rem 0;
+  background: none;
+  color: var(--pencil);
+}
+
+.rule::before {
+  content: '';
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.45;
+  mask-image: repeating-linear-gradient(
+    90deg,
+    #000 0 60px,
+    rgba(0, 0, 0, 0.55) 60px 74px,
+    #000 74px 150px
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Botões
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.9rem 1.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 200px 14px 180px 16px / 16px 180px 14px 200px;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+  box-shadow: 2px 3px 0 rgba(34, 31, 27, 0.18);
+}
+
+.btn:hover {
+  color: var(--ink);
+  transform: translate(-1px, -2px);
+  box-shadow: 4px 6px 0 rgba(34, 31, 27, 0.2);
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 rgba(34, 31, 27, 0.2);
+}
+
+.btn--primary {
+  background: var(--note);
+  border-color: var(--ink);
+}
+
+.btn--ghost {
+  border-style: dashed;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   Listas
+   -------------------------------------------------------------------------- */
+
+.list-check {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.list-check li {
+  position: relative;
+  padding-left: 1.7rem;
+}
+
+.list-check li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 0.85rem;
+  height: 0.45rem;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-48deg);
+}
+
+.list-dash {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.98em;
+}
+
+.list-dash li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--ink-2);
+}
+
+.list-dash li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.6rem;
+  height: 2px;
+  background: var(--pencil);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Preferências do usuário
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .note,
+  .frame--tilt {
+    transform: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .frame,
+  .sketch,
+  .note {
+    box-shadow: none;
+    transform: none;
+    border-color: #000;
+  }
+}

@@ -1,0 +1,131 @@
+---
+/**
+ * A segunda oferta: para quem precisa de acompanhamento na implantação.
+ * Fica depois do curso, dentro de uma moldura própria — como o contêiner
+ * "Consultoria" do quadro de planejamento.
+ */
+import { consultoriaAbertura, entregasDaConsultoria } from '../data/conteudo';
+import { acoes } from '../config/site';
+---
+
+<section class="section" id="a-consultoria" aria-labelledby="titulo-consultoria">
+  <div class="wrap">
+    <div class="frame frame--tilt caixa">
+      <p class="eyebrow">A consultoria</p>
+      <h2 id="titulo-consultoria">
+        Para órgãos públicos que precisam do método implantado, não apenas ensinado
+      </h2>
+
+      <div class="abertura">
+        {consultoriaAbertura.map((paragrafo) => <p>{paragrafo}</p>)}
+      </div>
+
+      <ol class="entregas">
+        {
+          entregasDaConsultoria.map((entrega) => (
+            <li class="entrega">
+              <h3 class="entrega__titulo">{entrega.titulo}</h3>
+              <p class="entrega__texto">{entrega.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="resultado">
+        <p class="hand">
+          Ao final: ambiente contratado e em produção, equipe treinada, política de uso
+          documentada, custo previsível e suporte por 12 meses.
+        </p>
+        <a class="btn btn--primary no-print" href={acoes.contatoConsultoria}>
+          Conversar sobre a consultoria
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .caixa {
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .caixa h2 {
+    max-width: 32ch;
+  }
+
+  .abertura {
+    max-width: 48rem;
+  }
+
+  .entregas {
+    list-style: none;
+    counter-reset: entrega;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.4rem 2rem;
+  }
+
+  @media (min-width: 50rem) {
+    .entregas {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .entregas {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .entrega {
+    counter-increment: entrega;
+    position: relative;
+    padding-left: 2.4rem;
+  }
+
+  .entrega::before {
+    content: counter(entrega);
+    position: absolute;
+    left: 0;
+    top: -0.15rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    display: grid;
+    place-content: center;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-family: var(--hand);
+    font-size: 1.2rem;
+    line-height: 1;
+    background: var(--note);
+  }
+
+  .entrega__titulo {
+    margin: 0 0 0.3rem;
+    font-size: 1.08rem;
+  }
+
+  .entrega__texto {
+    margin: 0;
+    font-size: 0.96em;
+    color: var(--ink-2);
+  }
+
+  .resultado {
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed rgba(34, 31, 27, 0.25);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .resultado p {
+    margin: 0;
+    max-width: 44ch;
+    color: var(--accent);
+  }
+</style>

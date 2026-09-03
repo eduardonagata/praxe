@@ -1,0 +1,168 @@
+---
+/**
+ * Layout base — concentra tudo que os buscadores leem antes do conteúdo:
+ * título, descrição, canonical, Open Graph, dados estruturados e idioma.
+ *
+ * A página é gerada estaticamente: o HTML entregue ao rastreador já contém
+ * todo o texto, sem depender de JavaScript no cliente.
+ */
+import '../styles/global.css';
+import { marca, curso, video } from '../config/site';
+import { faq, publicoAlvo, modulos } from '../data/conteudo';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  /** Caminho relativo, começando com barra. */
+  caminho?: string;
+}
+
+const { titulo, descricao, caminho = '/' } = Astro.props;
+
+const base = Astro.site?.href.replace(/\/$/, '') ?? marca.dominio;
+const canonical = `${base}${caminho}`;
+const imagemSocial = `${base}/og.png`;
+
+/* ---------------------------------------------------------------------------
+ * Dados estruturados (schema.org). Ajudam o buscador a entender que a página
+ * descreve um curso, quem o oferece e quais perguntas ela responde.
+ * ------------------------------------------------------------------------ */
+
+const autor = {
+  '@type': 'Person',
+  name: marca.autor,
+  jobTitle: 'Analista de sistemas e consultor em produção documental assistida por IA',
+};
+
+const dadosEstruturados = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${base}/#organizacao`,
+      name: marca.nome,
+      url: base,
+      description: curso.descricaoSeo,
+      founder: autor,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${base}/#site`,
+      url: base,
+      name: marca.nome,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': `${base}/#organizacao` },
+    },
+    {
+      '@type': 'Course',
+      '@id': `${base}/#curso`,
+      name: curso.titulo,
+      description: curso.descricaoSeo,
+      inLanguage: 'pt-BR',
+      teaches: publicoAlvo,
+      provider: { '@id': `${base}/#organizacao` },
+      author: autor,
+      audience: {
+        '@type': 'Audience',
+        audienceType:
+          'Servidores públicos, advogados, contadores, engenheiros, analistas e gestores que redigem documentos técnicos e formais',
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT10H',
+        inLanguage: 'pt-BR',
+      },
+      syllabusSections: modulos.map((m) => ({
+        '@type': 'Syllabus',
+        name: `Módulo ${m.numero} — ${m.titulo}`,
+        description: m.objetivo,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${base}/#faq`,
+      mainEntity: faq.map((item) => ({
+        '@type': 'Question',
+        name: item.pergunta,
+        acceptedAnswer: { '@type': 'Answer', text: item.resposta },
+      })),
+    },
+    ...(video.embedUrl
+      ? [
+          {
+            '@type': 'VideoObject',
+            name: video.titulo,
+            description: video.resumo,
+            embedUrl: video.embedUrl,
+            duration: video.duracao,
+            uploadDate: new Date().toISOString().slice(0, 10),
+          },
+        ]
+      : []),
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content={marca.autor} />
+    <meta name="theme-color" content="#f3f0e8" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={marca.nome} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imagemSocial} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descricao} />
+    <meta name="twitter:image" content={imagemSocial} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+    />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(dadosEstruturados)} />
+  </head>
+
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>
+
+<style>
+  .pular {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background: var(--note);
+    border: 2px solid var(--ink);
+    font-weight: 600;
+  }
+
+  .pular:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+</style>

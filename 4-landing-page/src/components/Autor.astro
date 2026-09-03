@@ -1,0 +1,64 @@
+---
+/**
+ * Quem ensina. Sinal de autoridade para o leitor e para o buscador — o texto
+ * corresponde ao `author` declarado nos dados estruturados.
+ */
+import { sobreAutor } from '../data/conteudo';
+import { marca } from '../config/site';
+---
+
+<section class="section section--sheet" id="quem-ensina" aria-labelledby="titulo-autor">
+  <div class="wrap">
+    <div class="grade">
+      <div>
+        <p class="eyebrow">Quem ensina</p>
+        <h2 id="titulo-autor">{marca.autor}</h2>
+        {sobreAutor.map((paragrafo) => <p>{paragrafo}</p>)}
+      </div>
+
+      <aside class="note credenciais">
+        <p class="credenciais__titulo">De onde vem o método</p>
+        <ul class="list-dash">
+          <li>Analista de sistemas e desenvolvedor de software</li>
+          <li>Servidor público, com rotina de produção documental</li>
+          <li>Anos de uso diário de controle de versão e codificação assistida por IA</li>
+          <li>Conhecimento dos ritos, do vocabulário e das exigências formais do setor público</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grade {
+    display: grid;
+    gap: clamp(1.5rem, 1rem + 3vw, 3rem);
+    align-items: start;
+  }
+
+  @media (min-width: 56rem) {
+    .grade {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  .grade > div {
+    max-width: 46rem;
+  }
+
+  .credenciais {
+    align-self: start;
+  }
+
+  .credenciais__titulo {
+    margin: 0 0 0.7rem;
+    font-weight: 600;
+    font-family: var(--hand);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .credenciais :global(.list-dash li) {
+    color: rgba(34, 31, 27, 0.82);
+  }
+</style>

@@ -1,0 +1,154 @@
+---
+/**
+ * Investimento. Os valores são provisórios e vivem em src/config/site.ts
+ * (`ofertas`), junto com os links de compra.
+ */
+import { ofertas, notaCompraPublica } from '../config/site';
+---
+
+<section class="section section--sheet" id="o-valor" aria-labelledby="titulo-valor">
+  <div class="wrap">
+    <p class="eyebrow">O valor</p>
+    <h2 id="titulo-valor">Três formas de começar</h2>
+    <p class="lead intro">
+      O núcleo comum serve a qualquer área. A vertical adiciona o vocabulário e os
+      documentos de um setor. A consultoria implanta tudo dentro do órgão.
+    </p>
+
+    <ul class="planos">
+      {
+        ofertas.map((oferta) => (
+          <li class={`plano${oferta.destaque ? ' plano--destaque' : ''}`}>
+            {oferta.destaque && <span class="fita hand">mais completo</span>}
+
+            <h3 class="plano__nome">{oferta.nome}</h3>
+            <p class="plano__resumo">{oferta.resumo}</p>
+
+            <p class="plano__preco">
+              <span class="valor">{oferta.preco}</span>
+              <span class="nota mono">{oferta.precoNota}</span>
+            </p>
+
+            <ul class="list-check plano__itens">
+              {oferta.itens.map((item) => <li>{item}</li>)}
+            </ul>
+
+            <a
+              class={`btn ${oferta.destaque ? 'btn--primary' : 'btn--ghost'} plano__cta no-print`}
+              href={oferta.cta.href}
+            >
+              {oferta.cta.rotulo}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="aviso sketch">{notaCompraPublica}</p>
+  </div>
+</section>
+
+<style>
+  .intro {
+    max-width: 46rem;
+  }
+
+  .planos {
+    list-style: none;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1.6rem;
+    align-items: stretch;
+  }
+
+  @media (min-width: 56rem) {
+    .planos {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .plano {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--ink);
+    border-radius: 3px;
+    padding: 1.6rem 1.5rem 1.75rem;
+    transform: rotate(-0.35deg);
+    box-shadow: 3px 4px 0 rgba(34, 31, 27, 0.1);
+  }
+
+  .plano:nth-child(2n) {
+    transform: rotate(0.4deg);
+  }
+
+  .plano--destaque {
+    background: var(--note);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(0, 0, 0, 0.03));
+  }
+
+  .fita {
+    position: absolute;
+    top: -1.05rem;
+    right: 1rem;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 0.1rem 0.75rem 0.2rem;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    color: var(--accent);
+    transform: rotate(2deg);
+  }
+
+  .plano__nome {
+    margin: 0;
+    font-size: 1.22rem;
+  }
+
+  .plano__resumo {
+    margin: 0 0 0.6rem;
+    font-size: 0.97em;
+    color: var(--ink-2);
+  }
+
+  .plano__preco {
+    margin: 0.2rem 0 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed rgba(34, 31, 27, 0.25);
+  }
+
+  .valor {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .nota {
+    color: var(--ink-3);
+  }
+
+  .plano__itens {
+    font-size: 0.95em;
+    margin-bottom: 1.4rem;
+  }
+
+  .plano__cta {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .aviso {
+    margin-top: 2.5rem;
+    max-width: 46rem;
+    font-size: 0.98em;
+    color: var(--ink-2);
+    background: rgba(255, 255, 255, 0.5);
+  }
+</style>

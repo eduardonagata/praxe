@@ -1,0 +1,143 @@
+---
+/**
+ * A virada: a pergunta que orienta o curso, a proposta e as sete teses —
+ * dispostas como os post-its do quadro de planejamento.
+ */
+import { pergunta, propostaDoCurso, teses } from '../data/conteudo';
+import Seta from './Seta.astro';
+---
+
+<section class="section section--sheet" id="o-curso" aria-labelledby="titulo-curso">
+  <div class="wrap">
+    <p class="eyebrow">O curso</p>
+
+    <div class="virada">
+      <div class="seta-pergunta">
+        <Seta variante="curva" largura="150px" cor="var(--accent)" />
+      </div>
+      <div class="frame frame--tilt pergunta">
+        <h2 id="titulo-curso">{pergunta}</h2>
+      </div>
+    </div>
+
+    <div class="proposta">
+      {propostaDoCurso.map((paragrafo) => <p>{paragrafo}</p>)}
+    </div>
+
+    <div class="teses">
+      <h3 class="teses__titulo">A tese central, em sete passos</h3>
+      <ol class="quadro">
+        {
+          teses.map((tese) => (
+            <li class="note">
+              <p class="afirmacao">{tese.afirmacao}</p>
+              <p class="desdobramento">{tese.desdobramento}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .virada {
+    position: relative;
+    display: grid;
+    justify-items: start;
+    margin-bottom: 2.5rem;
+  }
+
+  .seta-pergunta {
+    margin: 0 0 0.5rem 1rem;
+  }
+
+  .pergunta {
+    max-width: 46rem;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .pergunta h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 1.05rem + 1.4vw, 2rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .proposta {
+    max-width: 46rem;
+  }
+
+  .teses {
+    margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  }
+
+  .teses__titulo {
+    font-family: var(--hand);
+    font-size: 2rem;
+    color: var(--ink-2);
+    transform: rotate(-0.8deg);
+    transform-origin: left;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Grade deliberadamente irregular: as notas não se alinham em colunas
+     perfeitas, como no quadro original. */
+  .quadro {
+    list-style: none;
+    counter-reset: tese;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    align-items: start;
+  }
+
+  .quadro li {
+    counter-increment: tese;
+    position: relative;
+  }
+
+  .quadro li::before {
+    content: counter(tese);
+    position: absolute;
+    top: -0.6rem;
+    left: -0.6rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: grid;
+    place-content: center;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-family: var(--hand);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  /* Deslocamentos verticais leves para quebrar o alinhamento. */
+  @media (min-width: 48rem) {
+    .quadro li:nth-child(3n + 2) {
+      margin-top: 1.6rem;
+    }
+    .quadro li:nth-child(3n) {
+      margin-top: 0.7rem;
+    }
+  }
+
+  .afirmacao {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.3;
+  }
+
+  .desdobramento {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.45;
+    color: rgba(34, 31, 27, 0.78);
+  }
+</style>

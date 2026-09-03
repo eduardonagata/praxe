@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Abertura from '../components/Abertura.astro';
+import Video from '../components/Video.astro';
+import Problema from '../components/Problema.astro';
+import Curso from '../components/Curso.astro';
+import Grade from '../components/Grade.astro';
+import Valor from '../components/Valor.astro';
+import Consultoria from '../components/Consultoria.astro';
+import Autor from '../components/Autor.astro';
+import Perguntas from '../components/Perguntas.astro';
+import Rodape from '../components/Rodape.astro';
+import { marca, curso } from '../config/site';
+---
+
+<BaseLayout
+  titulo={`${curso.titulo} — ${marca.nome}`}
+  descricao={curso.descricaoSeo}
+  caminho="/"
+>
+  <Cabecalho />
+
+  <main id="conteudo">
+    <Abertura />
+    <Video />
+    <Problema />
+    <Curso />
+    <Grade />
+    <Valor />
+    <Consultoria />
+    <Autor />
+    <Perguntas />
+  </main>
+
+  <Rodape />
+</BaseLayout>
