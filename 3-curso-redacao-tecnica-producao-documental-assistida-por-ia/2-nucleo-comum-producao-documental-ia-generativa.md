@@ -1,4 +1,4 @@
-# Núcleo Comum do Treinamento — Produção Documental com IA Generativa
+# Núcleo Comum do Treinamento — Engenharia documental assistida por IA: Aprenda a estruturar o trabalho documental para que a IA possa participar dele de maneira contínua, contextualizada e verificável
 
 **Versão:** 0.1 (rascunho inicial)
 **Aplicação:** Base metodológica comum a todas as verticais. Entregue integralmente na consultoria para órgãos públicos e comercializado de forma autônoma no formato de treinamento online gravado.
