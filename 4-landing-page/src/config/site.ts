@@ -105,12 +105,12 @@ export const ofertas: Oferta[] = [
     id: 'consultoria',
     nome: 'A consultoria',
     resumo:
-      'Implantação assistida no órgão, do caminho de aquisição ao ambiente em produção.',
+      'Implantação assistida na organização, do caminho de aquisição ao ambiente em produção.',
     preco: 'Sob proposta',
     precoNota: 'escopo definido após diagnóstico',
     precoNumerico: null,
     itens: [
-      'Diagnóstico do fluxo documental do órgão',
+      'Diagnóstico do fluxo documental da organização',
       'Ambiente configurado e operacional',
       'Mínimo de 16 horas de treinamento para a equipe',
       'Política de uso e governança documentada',

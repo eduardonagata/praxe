@@ -24,7 +24,7 @@ import Seta from './Seta.astro';
       </p>
 
       <div class="acoes no-print">
-        <a class="btn btn--primary" href={acoes.compraCurso}>Ver o investimento</a>
+        <a class="btn btn--primary" href={acoes.compraCurso}>Quanto custa</a>
         <a class="btn btn--ghost" href="#a-grade">Conhecer a grade</a>
       </div>
 
@@ -42,6 +42,15 @@ import Seta from './Seta.astro';
         </p>
       </div>
 
+      <div class="marginalia" aria-hidden="true">
+        <span class="marginalia__seta">
+          <Seta variante="curta" largura="76px" cor="var(--accent)" rotacao={214} />
+        </span>
+        <p class="marginalia__texto hand">
+          num oceano de texto gerado por IA, isto aqui é o que tem valor
+        </p>
+      </div>
+
       <div class="seta-vertical">
         <Seta variante="baixo" largura="26px" />
       </div>
@@ -54,13 +63,6 @@ import Seta from './Seta.astro';
 <span class="add">+ nos termos do art. 18 da Lei nº 14.133/2021.</span>
 <span class="ctx">2. JUSTIFICATIVA DO PARCELAMENTO</span></code></pre>
       </div>
-
-      <p class="marginalia hand" aria-hidden="true">
-        num oceano de texto gerado por IA, isto aqui é o que tem valor
-      </p>
-      <span class="seta-marginalia" aria-hidden="true">
-        <Seta variante="curta" largura="76px" cor="var(--accent)" rotacao={200} />
-      </span>
 
       <figcaption id="legenda-abertura" class="visually-hidden">
         Do pedido escrito à mão ao documento formal, com as alterações destacadas linha
@@ -193,26 +195,32 @@ import Seta from './Seta.astro';
     background: rgba(76, 125, 74, 0.15);
   }
 
+  /* Aponta para o post-it: fica logo abaixo dele, encostada à direita,
+     com a seta subindo em diagonal de volta para o pedido escrito à mão. */
   .marginalia {
-    position: absolute;
-    right: -0.5rem;
-    bottom: -4.9rem;
-    max-width: 15rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    width: min(100%, 25rem);
+    margin-block: 0.5rem 0.1rem;
+  }
+
+  .marginalia__seta {
+    margin-top: -0.9rem;
+    margin-right: 0.2rem;
+  }
+
+  .marginalia__texto {
+    max-width: 14rem;
     text-align: right;
     color: var(--accent);
     transform: rotate(-2deg);
     margin: 0;
   }
 
-  .seta-marginalia {
-    position: absolute;
-    right: 15.5rem;
-    bottom: -3.9rem;
-  }
-
   @media (max-width: 48rem) {
-    .marginalia,
-    .seta-marginalia {
+    .marginalia {
       display: none;
     }
   }

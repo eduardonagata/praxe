@@ -77,13 +77,13 @@ export const etapasDoProblema: Etapa[] = [
   { texto: 'Cauteloso e desconfiado — com razão —, lê novamente todas as páginas.' },
   {
     texto:
-      'Repete o processo mais algumas vezes e, no fim, tem uma sessão de chat pela qual não consegue rolar sem correr o risco de uma LER. Desse chat, 90% do conteúdo não tem utilidade final alguma: o que você quer guardar é o seu pedido inicial, que contém as informações factuais relevantes, e o resultado final do trabalho.',
+      'Repete o processo mais algumas vezes e, no fim, tem uma sessão de chat pela qual não consegue rolar sem adquirir uma LER.... Desse chat, 90% do conteúdo não tem utilidade final alguma: o que você quer guardar é o seu pedido inicial, que contém as informações factuais relevantes, e o resultado final do trabalho.',
     margem: '90% é descarte',
   },
 ];
 
 export const fechamentoDoProblema: string[] = [
-  'Você produziu um documento, mas o processo que levou até ele ficou enterrado em uma conversa de chat. Em um mar de texto barato gerado por IA, o conhecimento que você acumulou e expressou para produzir aquele documento é um dos ativos mais importantes do seu trabalho — e merece ser tratado como tal.',
+  'Você produziu um documento, mas o processo que levou até ele ficou enterrado em uma conversa de chat. Em um mar de texto barato gerado por IA, o conhecimento que você acumulou e expressou para produzir aquele documento é um dos ativos mais importantes do seu trabalho. Você quer tratá-lo como cidadão de primeira classe.',
   'Não se trata de escrever perfeitamente segundo a norma culta ou de produzir uma formatação impecável — isso é trabalho para a IA. O que importa é o conhecimento factual, o contexto e as decisões que você fornece como matéria-prima para uma geração precisa.',
   'O problema não é usar IA para escrever documentos. É que estamos tentando fazer trabalho documental dentro de uma interface projetada para conversar.',
   'Nesse cenário, parte significativa da promessa de facilidade da IA se perde justamente na tarefa de preparar e atualizar o contexto de que ela precisa para trabalhar.',
@@ -281,8 +281,8 @@ export const cicloDeTrabalho: Passo[] = [
  * ---------------------------------------------------------------------- */
 
 export const consultoriaAbertura: string[] = [
-  'Hoje, na maioria dos órgãos públicos de pequeno e médio porte, a IA já está em uso — mas de forma invisível e sem governança. Servidores utilizam contas pessoais de ferramentas gratuitas para acelerar a redação de documentos, muitas vezes inserindo conteúdo administrativo em plataformas que o órgão não contratou, não monitora e sobre as quais não tem qualquer controle de tratamento de dados.',
-  'O risco existe independentemente de haver política sobre o assunto; a ausência de uma solução institucional é justamente o que empurra o uso para a informalidade. Esta consultoria entrega ao órgão um caminho completo — da contratação ao uso monitorado — para que a IA generativa passe a operar dentro de um ambiente formal, auditável e sob responsabilidade institucional.',
+  'Hoje, na maioria dos órgãos públicos de pequeno e médio porte, a IA já está em uso — mas de forma invisível e sem governança. Servidores utilizam contas pessoais de ferramentas gratuitas para acelerar a redação de documentos, muitas vezes inserindo conteúdo administrativo em plataformas que o órgão público não contratou, não monitora e sobre as quais não tem qualquer controle de tratamento de dados.',
+  'O risco existe independentemente de haver política sobre o assunto; a ausência de uma solução institucional é justamente o que empurra o uso para a informalidade. Esta consultoria entrega ao órgão público um caminho completo — da contratação ao uso monitorado — para que a IA generativa passe a operar dentro de um ambiente formal, auditável e sob responsabilidade institucional.',
 ];
 
 export const entregasDaConsultoria: { titulo: string; texto: string }[] = [
@@ -309,7 +309,7 @@ export const entregasDaConsultoria: { titulo: string; texto: string }[] = [
   {
     titulo: 'Capacitação da equipe',
     texto:
-      'Mínimo de 16 horas de treinamento prático sobre os documentos que o órgão efetivamente produz: ETPs, termos de referência, pareceres, ofícios e demais atos administrativos.',
+      'Mínimo de 16 horas de treinamento prático sobre os documentos que o órgão público efetivamente produz: ETPs, termos de referência, pareceres, ofícios e demais atos administrativos.',
   },
   {
     titulo: 'Responsabilidade e revisão humana',
@@ -350,7 +350,7 @@ export const faq: { pergunta: string; resposta: string }[] = [
   {
     pergunta: 'Qual a diferença entre o curso e a consultoria?',
     resposta:
-      'O curso ensina o método e você o implanta por conta própria. A consultoria implanta o método dentro do órgão: diagnóstico do fluxo atual, contratação regular do serviço de IA, ambiente configurado, treinamento da equipe, política de governança e suporte por 12 meses.',
+      'O curso ensina o método e você o implanta por conta própria. A consultoria implanta o método dentro do órgão público: diagnóstico do fluxo atual, contratação regular do serviço de IA, ambiente configurado, treinamento da equipe, política de governança e suporte por 12 meses.',
   },
   {
     pergunta: 'A consultoria funciona para empresas privadas?',
@@ -370,6 +370,6 @@ export const faq: { pergunta: string; resposta: string }[] = [
   {
     pergunta: 'Meu órgão público pode contratar sem cartão de crédito?',
     resposta:
-      'Sim. Órgãos que precisem de empenho, nota fiscal ou condições específicas de contratação podem tratar diretamente conosco, fora da plataforma de pagamento.',
+      'Sim. Órgãos públicos que precisem de empenho, nota fiscal ou condições específicas de contratação podem tratar diretamente conosco, fora da plataforma de pagamento.',
   },
 ];
