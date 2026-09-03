@@ -9,17 +9,17 @@ import { ofertas, notaCompraPublica } from '../config/site';
 <section class="section section--sheet" id="o-valor" aria-labelledby="titulo-valor">
   <div class="wrap">
     <p class="eyebrow">O valor</p>
-    <h2 id="titulo-valor">Três formas de começar</h2>
+    <h2 id="titulo-valor">Dois caminhos</h2>
     <p class="lead intro">
-      O núcleo comum serve a qualquer área. A vertical adiciona o vocabulário e os
-      documentos de um setor. A consultoria implanta tudo dentro do órgão.
+      O curso ensina o método e você o aplica por conta própria. A consultoria implanta
+      esse mesmo método dentro do órgão, com o treinamento da equipe incluído.
     </p>
 
     <ul class="planos">
       {
         ofertas.map((oferta) => (
           <li class={`plano${oferta.destaque ? ' plano--destaque' : ''}`}>
-            {oferta.destaque && <span class="fita hand">mais completo</span>}
+            {oferta.etiqueta && <span class="fita hand">{oferta.etiqueta}</span>}
 
             <h3 class="plano__nome">{oferta.nome}</h3>
             <p class="plano__resumo">{oferta.resumo}</p>
@@ -62,9 +62,10 @@ import { ofertas, notaCompraPublica } from '../config/site';
     align-items: stretch;
   }
 
-  @media (min-width: 56rem) {
+  @media (min-width: 50rem) {
     .planos {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 54rem;
     }
   }
 

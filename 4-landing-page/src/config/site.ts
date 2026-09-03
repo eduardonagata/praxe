@@ -77,14 +77,16 @@ export interface Oferta {
   precoNumerico: number | null;
   itens: string[];
   cta: { rotulo: string; href: string };
+  /** Etiqueta manuscrita presa ao topo do cartão. Omita para não exibir. */
+  etiqueta?: string;
   destaque: boolean;
 }
 
 export const ofertas: Oferta[] = [
   {
-    id: 'nucleo',
-    nome: 'Núcleo comum',
-    resumo: 'O método completo, agnóstico a setor e a tipo de documento.',
+    id: 'curso',
+    nome: 'O curso',
+    resumo: 'O método completo, gravado, para aplicar por conta própria.',
     preco: 'R$ 0.000',
     precoNota: 'valor a definir',
     precoNumerico: null,
@@ -95,32 +97,15 @@ export const ofertas: Oferta[] = [
       'Checklists de revisão e de segurança da informação',
       'Acesso vitalício e atualizações do material',
     ],
-    cta: { rotulo: 'Quero o núcleo comum', href: '#' },
-    destaque: false,
-  },
-  {
-    id: 'nucleo-vertical',
-    nome: 'Núcleo + vertical do setor público',
-    resumo:
-      'O método aplicado aos documentos que câmaras e prefeituras produzem todo dia.',
-    preco: 'R$ 0.000',
-    precoNota: 'valor a definir',
-    precoNumerico: null,
-    itens: [
-      'Tudo do núcleo comum',
-      '6 módulos adicionais da vertical do setor público',
-      'ETP e termo de referência construídos seção a seção',
-      'Governança, LGPD e política de uso institucional',
-      'Aquisição e gestão do serviço de IA pelo ente público',
-    ],
-    cta: { rotulo: 'Quero as duas partes', href: '#' },
+    cta: { rotulo: 'Quero o curso', href: '#' },
+    etiqueta: 'comece por aqui',
     destaque: true,
   },
   {
     id: 'consultoria',
-    nome: 'Consultoria para órgãos públicos',
+    nome: 'A consultoria',
     resumo:
-      'Implantação assistida, do caminho de aquisição ao ambiente em produção.',
+      'Implantação assistida no órgão, do caminho de aquisição ao ambiente em produção.',
     preco: 'Sob proposta',
     precoNota: 'escopo definido após diagnóstico',
     precoNumerico: null,

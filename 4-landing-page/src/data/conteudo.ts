@@ -3,8 +3,7 @@
  *
  * A fonte editorial destes textos são os documentos do repositório:
  *   ../3-curso-.../1-o-curso.md          → apresentação, problema, tese
- *   ../3-curso-.../2-nucleo-comum-....md → grade do núcleo comum
- *   ../3-curso-.../3-vertical-setor-....md → grade da vertical
+ *   ../3-curso-.../2-nucleo-comum-....md → grade do curso
  *   ../2-habilitacao-ia-orgaos-publicos.md → entregas da consultoria
  *
  * Tudo aqui é renderizado como HTML estático no build: não há texto injetado
@@ -143,7 +142,7 @@ export const teses: Tese[] = [
 ];
 
 /* -------------------------------------------------------------------------
- * Grade — núcleo comum
+ * Grade do curso
  * ---------------------------------------------------------------------- */
 
 export const publicoAlvo =
@@ -245,22 +244,37 @@ export const preRequisitos: string[] = [
 ];
 
 /* -------------------------------------------------------------------------
- * Vertical do setor público
+ * O ciclo de trabalho ensinado no curso
  * ---------------------------------------------------------------------- */
 
-export const vertical = {
-  titulo: 'Vertical do setor público',
-  resumo:
-    'Adaptação do método às exigências, ao vocabulário e às restrições da administração pública, com foco nos documentos que câmaras municipais e prefeituras efetivamente produzem.',
-  modulos: [
-    'Redação oficial e as exigências formais do documento público',
-    'Documentos de contratação pública: ETP, termo de referência e acessórios',
-    'Documentos do processo legislativo e administrativo',
-    'Governança, LGPD e uso institucional',
-    'Aquisição e gestão do serviço de IA no setor público',
-    'Ambiente de trabalho configurado',
-  ],
-};
+export interface Passo {
+  rotulo: string;
+  titulo: string;
+  detalhe: string;
+}
+
+export const cicloDeTrabalho: Passo[] = [
+  {
+    rotulo: 'você',
+    titulo: 'Escreve o que sabe',
+    detalhe: 'Em tópicos soltos, fora de ordem, em linguagem coloquial.',
+  },
+  {
+    rotulo: 'a IA',
+    titulo: 'Redige no repositório',
+    detalhe: 'Com o contexto, os documentos e as suas instruções à mão.',
+  },
+  {
+    rotulo: 'você',
+    titulo: 'Compara as versões',
+    detalhe: 'Vê apenas o que mudou, sem reler o documento inteiro.',
+  },
+  {
+    rotulo: 'você',
+    titulo: 'Revisa e assina',
+    detalhe: 'Com a formatação institucional aplicada automaticamente.',
+  },
+];
 
 /* -------------------------------------------------------------------------
  * Consultoria
@@ -324,9 +338,24 @@ export const faq: { pergunta: string; resposta: string }[] = [
       'Não. O curso é feito para profissionais sem formação em tecnologia. Não é exigido conhecimento prévio de programação, linha de comando ou ferramentas de desenvolvimento — apenas uso básico de computador e de editor de texto.',
   },
   {
+    pergunta: 'Não sou servidor público. Será que funciona para mim?',
+    resposta:
+      'Funciona. O cerne do curso é a produção textual — como estruturar, gerar, revisar e formatar um documento extenso com apoio de IA —, e isso independe da aplicação. O curso usa fortemente exemplos de fluxos de trabalho do serviço público, porque é o ambiente que conheço de perto e onde as exigências formais são mais rígidas, mas as técnicas são imediatamente transferíveis para qualquer necessidade de produção documental.',
+  },
+  {
     pergunta: 'O curso ensina a usar uma ferramenta específica?',
     resposta:
       'O que se entrega é um método de trabalho, não a recomendação de um software. As ferramentas mudam rápido; o fluxo — repositório, instruções persistentes, comparação de versões, formatação automatizada — sobrevive à substituição de qualquer uma delas.',
+  },
+  {
+    pergunta: 'Qual a diferença entre o curso e a consultoria?',
+    resposta:
+      'O curso ensina o método e você o implanta por conta própria. A consultoria implanta o método dentro do órgão: diagnóstico do fluxo atual, contratação regular do serviço de IA, ambiente configurado, treinamento da equipe, política de governança e suporte por 12 meses.',
+  },
+  {
+    pergunta: 'A consultoria funciona para empresas privadas?',
+    resposta:
+      'Sim. O método trata especificamente da redação de textos técnicos extensos: qualquer organização que precise produzir muitos documentos se beneficia das técnicas apresentadas. O que muda de um ambiente para outro é o vocabulário, o tipo de documento e as exigências formais — não o fluxo de trabalho.',
   },
   {
     pergunta: 'Como fica a segurança da informação e a LGPD?',
@@ -342,10 +371,5 @@ export const faq: { pergunta: string; resposta: string }[] = [
     pergunta: 'Meu órgão público pode contratar sem cartão de crédito?',
     resposta:
       'Sim. Órgãos que precisem de empenho, nota fiscal ou condições específicas de contratação podem tratar diretamente conosco, fora da plataforma de pagamento.',
-  },
-  {
-    pergunta: 'Qual a diferença entre o curso e a consultoria?',
-    resposta:
-      'O curso ensina o método e você o implanta por conta própria. A consultoria implanta o método dentro do órgão: diagnóstico do fluxo atual, contratação regular do serviço de IA, ambiente configurado, treinamento da equipe, política de governança e suporte por 12 meses.',
   },
 ];

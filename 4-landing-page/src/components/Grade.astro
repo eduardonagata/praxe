@@ -8,7 +8,7 @@ import {
   resultadosDeAprendizagem,
   modulos,
   preRequisitos,
-  vertical,
+  cicloDeTrabalho,
 } from '../data/conteudo';
 import Seta from './Seta.astro';
 ---
@@ -18,32 +18,25 @@ import Seta from './Seta.astro';
     <p class="eyebrow">A grade</p>
     <h2 id="titulo-grade">O que você aprende, módulo a módulo</h2>
 
-    <!-- Estrutura do produto: um núcleo reaproveitado por várias verticais. -->
-    <div class="diagrama" role="group" aria-label="Estrutura do curso">
-      <div class="caixa caixa--nucleo">
-        <span class="caixa__rotulo mono">base</span>
-        <p>Núcleo comum</p>
-      </div>
-
-      <div class="conector">
-        <span class="hand">especifica-se em</span>
-        <span class="seta-h"><Seta variante="curta" largura="72px" cor="var(--ink-2)" /></span>
-      </div>
-
-      <div class="caixa caixa--vertical">
-        <span class="caixa__rotulo mono">vertical</span>
-        <p>Setor público</p>
-      </div>
-
-      <div class="conector conector--simples">
-        <span class="seta-h"><Seta variante="curta" largura="72px" cor="var(--ink-2)" /></span>
-      </div>
-
-      <div class="destinos">
-        <div class="caixa caixa--pequena"><p>Prefeituras</p></div>
-        <div class="caixa caixa--pequena"><p>Câmaras municipais</p></div>
-      </div>
-    </div>
+    <!-- O ciclo que o curso ensina, do pedido ao documento assinado. -->
+    <ol class="ciclo" aria-label="O ciclo de trabalho do método">
+      {
+        cicloDeTrabalho.map((passo, i) => (
+          <li class="passo">
+            <div class="caixa">
+              <span class="caixa__rotulo mono">{passo.rotulo}</span>
+              <p class="caixa__titulo">{passo.titulo}</p>
+              <p class="caixa__detalhe">{passo.detalhe}</p>
+            </div>
+            {i < cicloDeTrabalho.length - 1 && (
+              <span class="seta-h">
+                <Seta variante="curta" largura="58px" cor="var(--ink-2)" />
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
 
     <div class="colunas">
       <div class="sketch bloco">
@@ -59,7 +52,7 @@ import Seta from './Seta.astro';
       </div>
     </div>
 
-    <h3 class="subtitulo">Núcleo comum — 6 módulos</h3>
+    <h3 class="subtitulo">O programa, em 6 módulos</h3>
 
     <ol class="modulos">
       {
@@ -85,50 +78,58 @@ import Seta from './Seta.astro';
 
     <div class="rodape-grade">
       <div class="sketch bloco">
-        <h3>{vertical.titulo}</h3>
-        <p class="muted">{vertical.resumo}</p>
-        <ul class="list-dash">
-          {vertical.modulos.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
-
-      <div class="bloco">
         <h3>Pré-requisitos</h3>
         <ul class="list-dash">
           {preRequisitos.map((item) => <li>{item}</li>)}
         </ul>
-        <p class="hand carga">
-          Carga estimada: 8 a 12 horas no núcleo comum, outro tanto na vertical.
+      </div>
+
+      <div class="bloco">
+        <h3>Carga horária</h3>
+        <p class="muted">
+          De 8 a 12 horas de conteúdo gravado, com exercícios práticos sobre documentos
+          reais. Acesso vitalício, no seu ritmo.
         </p>
+        <p class="hand carga">Um curso só, do começo ao documento assinado.</p>
       </div>
     </div>
+
   </div>
 </section>
 
 <style>
-  /* ---------------- Diagrama ---------------- */
+  /* ---------------- Ciclo ---------------- */
 
-  .diagrama {
+  .ciclo {
+    list-style: none;
+    margin: 0 0 clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  .passo {
+    display: flex;
     align-items: center;
-    gap: 0.9rem 1rem;
-    margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 3.5rem);
+    gap: 0.9rem;
+    flex: 1 1 15rem;
   }
 
   .caixa {
+    flex: 1;
+    align-self: stretch;
     background: var(--note);
     border: 2px solid var(--ink);
-    padding: 0.85rem 1.1rem;
-    min-width: 9.5rem;
+    padding: 0.85rem 1rem 1rem;
     box-shadow: 3px 4px 0 rgba(34, 31, 27, 0.1);
     transform: rotate(-0.7deg);
   }
 
-  .caixa p {
-    margin: 0;
-    font-weight: 600;
-    line-height: 1.2;
+  .passo:nth-child(2n) .caixa {
+    transform: rotate(0.8deg);
+    background: var(--note-deep);
   }
 
   .caixa__rotulo {
@@ -137,55 +138,40 @@ import Seta from './Seta.astro';
     margin-bottom: 0.15rem;
   }
 
-  .caixa--vertical {
-    transform: rotate(0.8deg);
+  .caixa__titulo {
+    margin: 0 0 0.3rem;
+    font-weight: 600;
+    line-height: 1.2;
   }
 
-  .caixa--pequena {
-    background: var(--paper-soft);
-    min-width: 8rem;
-    padding: 0.6rem 0.9rem;
-    font-size: 0.95rem;
-  }
-
-  .destinos {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .conector {
-    display: grid;
-    justify-items: center;
-    gap: 0.1rem;
-    color: var(--ink-3);
-  }
-
-  .conector .hand {
-    font-size: 1.15rem;
-    line-height: 1;
-  }
-
-  .conector--simples {
-    padding-top: 0.2rem;
+  .caixa__detalhe {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: rgba(34, 31, 27, 0.75);
   }
 
   .seta-h {
     display: block;
+    flex: none;
   }
 
   @media (max-width: 46rem) {
-    .diagrama {
+    .ciclo {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .passo {
       flex-direction: column;
       align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .passo .caixa {
+      width: 100%;
     }
     .seta-h {
       transform: rotate(90deg);
-    }
-    .conector {
-      justify-items: start;
-      grid-auto-flow: column;
-      align-items: center;
-      gap: 0.6rem;
+      margin-left: 2rem;
     }
   }
 

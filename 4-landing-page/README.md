@@ -61,8 +61,7 @@ Os textos vêm dos documentos do repositório e estão consolidados em
 `src/data/conteudo.ts`:
 
 - `../3-curso-.../1-o-curso.md` — apresentação, problema e tese central
-- `../3-curso-.../2-nucleo-comum-....md` — grade do núcleo comum
-- `../3-curso-.../3-vertical-setor-publico.md` — grade da vertical
+- `../3-curso-.../2-nucleo-comum-....md` — grade do curso
 - `../2-habilitacao-ia-orgaos-publicos.md` — entregas da consultoria
 
 Ao alterar um desses documentos, replicar a mudança em `src/data/conteudo.ts`.
