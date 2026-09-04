@@ -34,7 +34,7 @@ do envio, aí refaz tudo de novo.
 Alguns já quebraram de vez. Tem duas máquinas paradas na sala do arquivo
 que o Nélson (o rapaz da TI, que vem terça e quinta) disse que não vale
 conserto, tirou peça de uma pra fazer a outra andar. O micro do protocolo
-tá com um monitor emprestado do gabinete do vereador Ramón desde o ano
+tá com um monitor emprestado do gabinete do vereador Adilson desde o ano
 passado e ninguém devolveu.
 
 Precisa trocar. Eu contei 14 máquinas, mas confere comigo: contei as dos
