@@ -39,8 +39,8 @@ passado e ninguém devolveu.
 
 Precisa trocar. Eu contei 14 máquinas, mas confere comigo: contei as dos
 servidores, dos setores. Não pus os gabinetes dos vereadores porque o
-Dr. Roberto falou que gabinete se resolve com verba de gabinete — só que
-o presidente na reunião falou "troca tudo". Fica a dúvida.
+Dr. Roberto falou que gabinete é outra conversa — só que o presidente na
+reunião falou "troca tudo". Fica a dúvida.
 
 O que eu não sei:
 
@@ -74,7 +74,7 @@ Cada lacuna abaixo é o gancho de um momento da demonstração. Quem conduz a au
 | O que está ambíguo no relato | O que o documento formal vai exigir |
 | --- | --- |
 | "Contei 14, mas confere comigo" | Quantitativo justificado, com o critério de contagem explícito |
-| Gabinetes dentro ou fora ("troca tudo" × verba de gabinete) | Delimitação do objeto e de quem é atendido |
+| Gabinetes dentro ou fora ("troca tudo" × "outra conversa") | Delimitação do objeto e de quem é atendido |
 | "2015, 2016 por aí", contestado pelo Válter | Idade real do parque, apurada no patrimônio |
 | Desktop ou notebook; monitor junto ou aproveitado | Definição do objeto antes de qualquer especificação |
 | Configuração vinda de mensagem, não confirmada | Especificação técnica fundamentada, não descrita por marca |
