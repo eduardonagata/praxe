@@ -42,17 +42,10 @@ servidores, dos setores. Não pus os gabinetes dos vereadores porque o
 Dr. Roberto falou que gabinete é outra conversa — só que o presidente na
 reunião falou "troca tudo". Fica a dúvida.
 
-O que eu não sei:
-
-- se é desktop ou notebook. O Nélson acha melhor notebook por causa das
-  sessões e do pessoal da folha que às vezes trabalha de casa. Eu acho que
-  notebook some.
-- se compra monitor junto ou aproveita os que tem. Alguns monitores parecem
-  bons ainda.
-- configuração certa. O Nélson mandou no WhatsApp "i5 de 12ª, 16 de RAM e
-  SSD de 512", mas ele mesmo disse que ia confirmar depois.
-- o sistema novo de licitação que a gente vai contratar tem um requisito
-  mínimo de máquina lá no material deles, eu não achei onde.
+De configuração, o Nélson disse que tem que ser i5 de 12ª geração, 16 de RAM
+e SSD de 512, mas ficou de confirmar. Falou também do requisito mínimo do
+sistema novo de licitação, e que o computador da transmissão das sessões
+talvez precise ser mais potente que os outros.
 
 Dinheiro: o seu Jaiminho comentou que tem por volta de 80 mil na dotação de
 equipamento, mas que depende do que sobrar do ar-condicionado do plenário.
@@ -76,9 +69,9 @@ Cada lacuna abaixo é o gancho de um momento da demonstração. Quem conduz a au
 | "Contei 14, mas confere comigo" | Quantitativo justificado, com o critério de contagem explícito |
 | Gabinetes dentro ou fora ("troca tudo" × "outra conversa") | Delimitação do objeto e de quem é atendido |
 | "2015, 2016 por aí", contestado pelo Válter | Idade real do parque, apurada no patrimônio |
-| Desktop ou notebook; monitor junto ou aproveitado | Definição do objeto antes de qualquer especificação |
-| Configuração vinda de mensagem, não confirmada | Especificação técnica fundamentada, não descrita por marca |
-| Requisito do sistema novo "que eu não achei" | Requisito localizado e citado, ou a demanda espera por ele |
+| Configuração passada de boca, que o próprio autor ficou de confirmar | Especificação técnica fundamentada, não descrita por marca |
+| Requisito mínimo do sistema novo, mencionado e não localizado | Requisito conferido e citado, ou a demanda espera por ele |
+| Máquina da transmissão "talvez mais potente" | Objeto homogêneo ou dividido em itens de especificação distinta |
 | "Por volta de 80 mil", condicionado a outra despesa | Estimativa de valor e disponibilidade orçamentária |
 | "Resolvido esse ano" | Prazo com a razão que o sustenta |
 | Ata da prefeitura que "o pessoal comentou" | Forma de contratação analisada, não presumida |
