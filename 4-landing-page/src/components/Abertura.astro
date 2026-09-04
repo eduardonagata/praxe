@@ -34,20 +34,20 @@ import Seta from './Seta.astro';
     </div>
 
     <figure class="ilustracao" aria-labelledby="legenda-abertura">
+      <div class="marginalia" aria-hidden="true">
+        <span class="marginalia__seta">
+          <Seta variante="curta" largura="80px" cor="var(--accent)" rotacao={112} />
+        </span>
+        <p class="marginalia__texto hand">
+          num oceano de texto gerado por IA, isto aqui é o que tem valor
+        </p>
+      </div>
+
       <div class="postit">
         <p class="postit__rotulo mono">seu pedido, escrito por você</p>
         <p class="postit__texto">
           ETP para a compra de 12 estações de trabalho. Prazo de 90 dias. Orçamento em
           anexo. Precisa citar a Lei 14.133 e justificar o parcelamento.
-        </p>
-      </div>
-
-      <div class="marginalia" aria-hidden="true">
-        <span class="marginalia__seta">
-          <Seta variante="curta" largura="76px" cor="var(--accent)" rotacao={214} />
-        </span>
-        <p class="marginalia__texto hand">
-          num oceano de texto gerado por IA, isto aqui é o que tem valor
         </p>
       </div>
 
@@ -195,20 +195,23 @@ import Seta from './Seta.astro';
     background: rgba(76, 125, 74, 0.15);
   }
 
-  /* Aponta para o post-it: fica logo abaixo dele, encostada à direita,
-     com a seta subindo em diagonal de volta para o pedido escrito à mão. */
+  /* Aponta para o post-it, de cima. Fica acima dele para não separar o post-it
+     da seta que desce até o documento: o pedido e o resultado ficam encadeados. */
   .marginalia {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: flex-end;
-    gap: 0.7rem;
+    gap: 0.5rem;
     width: min(100%, 25rem);
-    margin-block: 0.5rem 0.1rem;
+    margin-block: 0 0.35rem;
+    /* Desenha por cima do post-it: a ponta da seta encosta no papel. */
+    position: relative;
+    z-index: 1;
   }
 
   .marginalia__seta {
-    margin-top: -0.9rem;
-    margin-right: 0.2rem;
+    margin-bottom: -1.1rem;
+    margin-right: 1.6rem;
   }
 
   .marginalia__texto {
