@@ -26,7 +26,7 @@ A demanda parte da Diretoria Administrativa e chega, por mensagem, à servidora 
 Fernanda, segue o que a gente conversou na quinta pra você ir formalizando.
 
 Os computadores daqui já era. Foram comprados na gestão passada, acho que
-2015, 2016 por aí — o Válter jura que é mais antigo que isso. A maioria
+2015, 2016 por aí — o Valter jura que é mais antigo que isso. A maioria
 trava. O pessoal da contabilidade reclama todo mês no fechamento, o sistema
 do Tribunal demora uma eternidade pra abrir e de vez em quando cai no meio
 do envio, aí refaz tudo de novo.
@@ -38,24 +38,19 @@ tá com um monitor emprestado do gabinete do vereador Adilson desde o ano
 passado e ninguém devolveu.
 
 Precisa trocar. Eu contei 14 máquinas, mas confere comigo: contei as dos
-servidores, dos setores. Não pus os gabinetes dos vereadores porque o
-Dr. Roberto falou que gabinete é outra conversa — só que o presidente na
-reunião falou "troca tudo". Fica a dúvida.
+servidores, dos setores. Contei inclui nessa contagem computadores para os vereadores.
 
 De configuração, o Nélson disse que tem que ser i5 de 12ª geração, 16 de RAM
 e SSD de 512, mas ficou de confirmar. Falou também do requisito mínimo do
 sistema novo de licitação, e que o computador da transmissão das sessões
 talvez precise ser mais potente que os outros.
 
-Dinheiro: o seu Jaiminho comentou que tem por volta de 80 mil na dotação de
-equipamento, mas que depende do que sobrar do ar-condicionado do plenário.
+Dinheiro: o seu Jaiminho comentou que tem por volta de 80 mil na dotação de equipamento, mas que depende do que sobrar do ar-condicionado do plenário.
+
 Não tomei como certo.
 
 Prazo: o presidente quer resolvido esse ano. Recesso começa em dezembro,
 então imagino que tenha que estar empenhado antes disso.
-
-Ah, e a prefeitura fez uma ata de registro de preços de computador esse ano.
-O pessoal comentou. Não sei se dá pra pegar carona ou se compensa.
 
 Qualquer coisa me chama.
 ```
@@ -68,7 +63,7 @@ Cada lacuna abaixo é o gancho de um momento da demonstração. Quem conduz a au
 | --- | --- |
 | "Contei 14, mas confere comigo" | Quantitativo justificado, com o critério de contagem explícito |
 | Gabinetes dentro ou fora ("troca tudo" × "outra conversa") | Delimitação do objeto e de quem é atendido |
-| "2015, 2016 por aí", contestado pelo Válter | Idade real do parque, apurada no patrimônio |
+| "2015, 2016 por aí", contestado pelo Valter | Idade real do parque, apurada no patrimônio |
 | Configuração passada de boca, que o próprio autor ficou de confirmar | Especificação técnica fundamentada, não descrita por marca |
 | Requisito mínimo do sistema novo, mencionado e não localizado | Requisito conferido e citado, ou a demanda espera por ele |
 | Máquina da transmissão "talvez mais potente" | Objeto homogêneo ou dividido em itens de especificação distinta |
