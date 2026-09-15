@@ -43,21 +43,28 @@ export const navegacao = [
 ] as const;
 
 /**
- * Vídeo de apresentação.
+ * Vídeos da seção de apresentação, na ordem em que aparecem.
+ * O título do primeiro é também o título da seção.
  * Deixe `embedUrl` vazio para exibir a moldura de espaço reservado.
  * Ex.: 'https://www.youtube.com/embed/XXXXXXXXXXX'
+ *
+ * `resumo` fica visível na página e é lido pelos buscadores — mecanismo de
+ * busca não assiste a vídeo, mas lê o texto ao lado dele.
  */
-export const video = {
-  embedUrl: '',
-  titulo: 'Apresentação do curso em 3 minutos',
-  /**
-   * Resumo em texto do vídeo. Fica visível na página e é lido pelos buscadores
-   * — mecanismo de busca não assiste a vídeo, mas lê a transcrição.
-   */
-  resumo:
-    'Uma demonstração do método em funcionamento: um pedido escrito por você, um documento formal gerado a partir dele e a comparação lado a lado que mostra exatamente o que mudou entre uma versão e outra.',
-  duracao: 'PT3M',
-} as const;
+export const videos = [
+  {
+    embedUrl: 'https://www.youtube.com/embed/ugopkj3cT30',
+    titulo: 'Apresentação do curso',
+    resumo:
+      'Uma demonstração do método em funcionamento: um pedido escrito por você, um documento formal gerado a partir dele e a comparação lado a lado que mostra exatamente o que mudou entre uma versão e outra.',
+  },
+  {
+    embedUrl: 'https://www.youtube.com/embed/bwB-pitu03Y',
+    titulo: 'O que você aprenderá',
+    resumo:
+      'Um percurso pela grade do curso: o que cada módulo ensina e o que você passa a fazer sozinho ao final de cada etapa.',
+  },
+] as const;
 
 /** Chamadas para ação. Substitua pelos links reais (Hotmart, formulário, e-mail). */
 export const acoes = {

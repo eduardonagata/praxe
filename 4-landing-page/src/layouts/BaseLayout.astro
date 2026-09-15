@@ -7,7 +7,7 @@
  * todo o texto, sem depender de JavaScript no cliente.
  */
 import '../styles/global.css';
-import { marca, curso, video } from '../config/site';
+import { marca, curso, videos } from '../config/site';
 import { faq, publicoAlvo, modulos } from '../data/conteudo';
 
 interface Props {
@@ -88,18 +88,15 @@ const dadosEstruturados = {
         acceptedAnswer: { '@type': 'Answer', text: item.resposta },
       })),
     },
-    ...(video.embedUrl
-      ? [
-          {
-            '@type': 'VideoObject',
-            name: video.titulo,
-            description: video.resumo,
-            embedUrl: video.embedUrl,
-            duration: video.duracao,
-            uploadDate: new Date().toISOString().slice(0, 10),
-          },
-        ]
-      : []),
+    ...videos
+      .filter((video) => video.embedUrl)
+      .map((video) => ({
+        '@type': 'VideoObject',
+        name: video.titulo,
+        description: video.resumo,
+        embedUrl: video.embedUrl,
+        uploadDate: new Date().toISOString().slice(0, 10),
+      })),
   ],
 };
 ---

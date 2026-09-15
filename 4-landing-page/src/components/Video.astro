@@ -1,48 +1,58 @@
 ---
 /**
- * Seção de vídeo. Enquanto `video.embedUrl` estiver vazio em src/config/site.ts,
- * exibe uma moldura de espaço reservado. O resumo em texto fica sempre visível:
+ * Seção de vídeos. Cada vídeo com `embedUrl` vazio em src/config/site.ts exibe
+ * uma moldura de espaço reservado. O resumo em texto fica sempre visível:
  * buscador não assiste a vídeo, mas lê o que está escrito ao lado dele.
  */
-import { video } from '../config/site';
+import { videos } from '../config/site';
+
+const [principal] = videos;
 ---
 
 <section class="section section--sheet" id="o-video" aria-labelledby="titulo-video">
   <div class="wrap">
-    <p class="eyebrow">Em três minutos</p>
-    <h2 id="titulo-video">{video.titulo}</h2>
+    <h2 id="titulo-video">{principal.titulo}</h2>
 
-    <div class="conteudo">
-      <div class="moldura">
-        {
-          video.embedUrl ? (
-            <iframe
-              src={video.embedUrl}
-              title={video.titulo}
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowfullscreen
-            />
-          ) : (
-            <div class="reserva">
-              <span class="play" aria-hidden="true" />
-              <p class="hand">espaço reservado para o vídeo</p>
-              <p class="mono dica">
-                cole a URL de incorporação em <code>src/config/site.ts → video.embedUrl</code>
-              </p>
+    <div class="lista">
+      {
+        videos.map((video, i) => (
+          <div class={i % 2 ? 'conteudo conteudo--invertido' : 'conteudo'}>
+            <div class="moldura">
+              {video.embedUrl ? (
+                <iframe
+                  src={video.embedUrl}
+                  title={video.titulo}
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                />
+              ) : (
+                <div class="reserva">
+                  <span class="play" aria-hidden="true" />
+                  <p class="hand">vídeo em breve</p>
+                  {import.meta.env.DEV && (
+                    <p class="mono dica">
+                      cole a URL de incorporação em <code>src/config/site.ts → videos[{i}].embedUrl</code>
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
-          )
-        }
-      </div>
 
-      <div class="resumo">
-        <p>{video.resumo}</p>
-        <p class="muted mono">
-          O vídeo é um resumo. Todo o conteúdo do método está descrito em texto nesta
-          página, seção por seção.
-        </p>
-      </div>
+            <div class="resumo">
+              {i > 0 && <h3>{video.titulo}</h3>}
+              <p>{video.resumo}</p>
+              {i === videos.length - 1 && (
+                <p class="muted mono">
+                  Os vídeos são um resumo. Todo o conteúdo do método está descrito em texto
+                  nesta página, seção por seção.
+                </p>
+              )}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -54,9 +64,24 @@ import { video } from '../config/site';
     align-items: center;
   }
 
+  .lista {
+    display: grid;
+    gap: clamp(3rem, 2rem + 5vw, 6rem);
+  }
+
   @media (min-width: 60rem) {
     .conteudo {
       grid-template-columns: 1.6fr 1fr;
+    }
+
+    /* Alterna os lados: vídeo à direita, texto à esquerda. */
+    .conteudo--invertido {
+      grid-template-columns: 1fr 1.6fr;
+    }
+
+    .conteudo--invertido .moldura {
+      order: 2;
+      transform: rotate(0.4deg);
     }
   }
 
