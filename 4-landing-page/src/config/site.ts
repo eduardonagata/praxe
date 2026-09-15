@@ -23,7 +23,7 @@ export const marca: Marca = {
   nome: 'Praxe',
   assinatura: 'consultoria',
   autor: 'Eduardo Nagata',
-  dominio: 'https://praxe.com.br',
+  dominio: 'https://praxe.assistanthub.com.br',
 };
 
 /** Título e subtítulo do curso — provisórios, fáceis de substituir. */
