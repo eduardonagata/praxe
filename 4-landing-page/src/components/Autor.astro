@@ -10,10 +10,23 @@ import { marca } from '../config/site';
 <section class="section section--sheet" id="quem-ensina" aria-labelledby="titulo-autor">
   <div class="wrap">
     <div class="grade">
-      <div>
-        <p class="eyebrow">Quem ensina</p>
-        <h2 id="titulo-autor">{marca.autor}</h2>
-        {sobreAutor.map((paragrafo) => <p>{paragrafo}</p>)}
+      <div class="apresentacao">
+        <img
+          class="foto"
+          src="/1768476818095.jpeg"
+          alt={`Foto de ${marca.autor}`}
+          width="400"
+          height="400"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="cabeca">
+          <p class="eyebrow">Quem ensina</p>
+          <h2 id="titulo-autor">{marca.autor}</h2>
+        </div>
+        <div class="texto">
+          {sobreAutor.map((paragrafo) => <p>{paragrafo}</p>)}
+        </div>
       </div>
 
       <aside class="note credenciais">
@@ -44,6 +57,52 @@ import { marca } from '../config/site';
 
   .grade > div {
     max-width: 46rem;
+  }
+
+  /* Foto à esquerda do nome e dos parágrafos. Em tela estreita, os parágrafos
+     descem para a largura toda e a foto fica só ao lado do nome. */
+  .apresentacao {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'foto cabeca'
+      'foto texto';
+    column-gap: clamp(1rem, 0.5rem + 2vw, 2rem);
+    align-items: start;
+  }
+
+  .foto {
+    grid-area: foto;
+    width: clamp(5.5rem, 4rem + 6vw, 9rem);
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--paper-soft);
+    box-shadow:
+      0 0 0 2px var(--ink),
+      4px 5px 0 2px rgba(34, 31, 27, 0.12);
+  }
+
+  .cabeca {
+    grid-area: cabeca;
+  }
+
+  .texto {
+    grid-area: texto;
+  }
+
+  @media (max-width: 36rem) {
+    .apresentacao {
+      grid-template-areas:
+        'foto cabeca'
+        'texto texto';
+      row-gap: 1.25rem;
+    }
+
+    .cabeca {
+      align-self: center;
+    }
   }
 
   .credenciais {

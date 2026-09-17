@@ -21,7 +21,7 @@ export interface Marca {
 
 export const marca: Marca = {
   nome: 'Praxe',
-  assinatura: 'consultoria',
+  assinatura: 'consultoria e treinamento',
   autor: 'Eduardo Nagata',
   dominio: 'https://praxe.assistanthub.com.br',
 };
@@ -44,27 +44,32 @@ export const navegacao = [
 
 /**
  * Vídeos da seção de apresentação, na ordem em que aparecem.
- * O título do primeiro é também o título da seção.
+ * `titulo` aparece acima de cada vídeo.
  * Deixe `embedUrl` vazio para exibir a moldura de espaço reservado.
  * Ex.: 'https://www.youtube.com/embed/XXXXXXXXXXX'
  *
- * `resumo` fica visível na página e é lido pelos buscadores — mecanismo de
- * busca não assiste a vídeo, mas lê o texto ao lado dele.
+ * `resumo` não aparece na página: é a descrição do vídeo nos dados
+ * estruturados lidos pelos buscadores.
  */
 export const videos = [
   {
     embedUrl: 'https://www.youtube.com/embed/ugopkj3cT30',
-    titulo: 'Apresentação do curso',
+    titulo: 'Aula 1 — Apresentação',
     resumo:
       'Uma demonstração do método em funcionamento: um pedido escrito por você, um documento formal gerado a partir dele e a comparação lado a lado que mostra exatamente o que mudou entre uma versão e outra.',
   },
   {
     embedUrl: 'https://www.youtube.com/embed/bwB-pitu03Y',
-    titulo: 'O que você aprenderá',
+    titulo: 'Aula 2 — O que você aprenderá a fazer',
     resumo:
       'Um percurso pela grade do curso: o que cada módulo ensina e o que você passa a fazer sozinho ao final de cada etapa.',
   },
 ] as const;
+
+/** Extrai o identificador do vídeo de uma URL de incorporação do YouTube. */
+export function idDoYoutube(embedUrl: string): string {
+  return new URL(embedUrl).pathname.split('/').pop() ?? '';
+}
 
 /** Chamadas para ação. Substitua pelos links reais (Hotmart, formulário, e-mail). */
 export const acoes = {

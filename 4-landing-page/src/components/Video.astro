@@ -1,32 +1,47 @@
 ---
 /**
- * Seção de vídeos. Cada vídeo com `embedUrl` vazio em src/config/site.ts exibe
- * uma moldura de espaço reservado. O resumo em texto fica sempre visível:
- * buscador não assiste a vídeo, mas lê o que está escrito ao lado dele.
+ * Seção de vídeos: cada aula com o título acima da moldura. Cada vídeo com
+ * `embedUrl` vazio em src/config/site.ts exibe uma moldura de espaço reservado.
+ *
+ * O player do YouTube só é carregado no clique. Até lá, a moldura mostra a
+ * miniatura do vídeo: cada player pesa perto de 1 MB de script, e a seção fica
+ * logo abaixo da abertura, onde `loading="lazy"` não adiaria nada.
  */
-import { videos } from '../config/site';
-
-const [principal] = videos;
+import { videos, idDoYoutube } from '../config/site';
 ---
 
-<section class="section section--sheet" id="o-video" aria-labelledby="titulo-video">
+<section class="section section--sheet" id="o-video" aria-label="Aulas em vídeo">
   <div class="wrap">
-    <h2 id="titulo-video">{principal.titulo}</h2>
-
     <div class="lista">
       {
         videos.map((video, i) => (
           <div class={i % 2 ? 'conteudo conteudo--invertido' : 'conteudo'}>
+            <h2>{video.titulo}</h2>
             <div class="moldura">
               {video.embedUrl ? (
-                <iframe
-                  src={video.embedUrl}
-                  title={video.titulo}
-                  loading="lazy"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                />
+                <a
+                  class="capa"
+                  href={`https://www.youtube.com/watch?v=${idDoYoutube(video.embedUrl)}`}
+                  data-video={idDoYoutube(video.embedUrl)}
+                  data-titulo={video.titulo}
+                  aria-label={`Reproduzir o vídeo: ${video.titulo}`}
+                >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset={`https://i.ytimg.com/vi_webp/${idDoYoutube(video.embedUrl)}/maxresdefault.webp`}
+                    />
+                    <img
+                      src={`https://i.ytimg.com/vi/${idDoYoutube(video.embedUrl)}/maxresdefault.jpg`}
+                      alt=""
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <span class="play" aria-hidden="true" />
+                </a>
               ) : (
                 <div class="reserva">
                   <span class="play" aria-hidden="true" />
@@ -39,17 +54,6 @@ const [principal] = videos;
                 </div>
               )}
             </div>
-
-            <div class="resumo">
-              {i > 0 && <h3>{video.titulo}</h3>}
-              <p>{video.resumo}</p>
-              {i === videos.length - 1 && (
-                <p class="muted mono">
-                  Os vídeos são um resumo. Todo o conteúdo do método está descrito em texto
-                  nesta página, seção por seção.
-                </p>
-              )}
-            </div>
           </div>
         ))
       }
@@ -57,32 +61,61 @@ const [principal] = videos;
   </div>
 </section>
 
+<script>
+  // Sem JavaScript, a capa continua sendo um link para o vídeo no YouTube.
+  let conectado = false;
+
+  function preconectar() {
+    if (conectado) return;
+    conectado = true;
+    for (const href of ['https://www.youtube-nocookie.com', 'https://www.google.com']) {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = href;
+      document.head.append(link);
+    }
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('a.capa[data-video]').forEach((capa) => {
+    capa.addEventListener('pointerover', preconectar, { once: true });
+    capa.addEventListener('focus', preconectar, { once: true });
+    capa.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${capa.dataset.video}?autoplay=1&playsinline=1&rel=0`;
+      iframe.title = capa.dataset.titulo ?? '';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      capa.replaceWith(iframe);
+      iframe.focus();
+    });
+  });
+</script>
+
 <style>
   .conteudo {
     display: grid;
-    gap: clamp(1.5rem, 1rem + 3vw, 3rem);
-    align-items: center;
+    gap: 1rem;
+    align-content: start;
   }
 
+  /* Título de aula, não de seção: menor que o h2 padrão. */
+  .conteudo h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
+  }
+
+  /* As aulas uma sobre a outra, cada moldura na largura toda do conteúdo. */
   .lista {
     display: grid;
-    gap: clamp(3rem, 2rem + 5vw, 6rem);
+    gap: clamp(3rem, 2rem + 4vw, 5rem);
   }
 
-  @media (min-width: 60rem) {
-    .conteudo {
-      grid-template-columns: 1.6fr 1fr;
-    }
-
-    /* Alterna os lados: vídeo à direita, texto à esquerda. */
-    .conteudo--invertido {
-      grid-template-columns: 1fr 1.6fr;
-    }
-
-    .conteudo--invertido .moldura {
-      order: 2;
-      transform: rotate(0.4deg);
-    }
+  /* Alterna a inclinação das molduras. */
+  .conteudo--invertido .moldura {
+    transform: rotate(0.4deg);
   }
 
   .moldura {
@@ -105,12 +138,52 @@ const [principal] = videos;
   }
 
   .moldura :global(iframe),
+  .capa,
   .reserva {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     border: 0;
     background: rgba(34, 31, 27, 0.06);
+  }
+
+  .capa {
+    position: relative;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  /* Fora do fluxo, para a grade ter uma célula só e o play ficar no centro. */
+  .capa picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .capa img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .capa .play {
+    background: var(--paper-soft);
+    opacity: 0.92;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  /* Moldura grande, botão proporcional. */
+  @media (min-width: 48rem) {
+    .capa .play {
+      scale: 1.4;
+    }
+  }
+
+  .capa:hover .play,
+  .capa:focus-visible .play {
+    opacity: 1;
+    transform: scale(1.08);
   }
 
   .reserva {
@@ -150,9 +223,5 @@ const [principal] = videos;
   .dica code {
     background: rgba(34, 31, 27, 0.07);
     padding: 0.1em 0.35em;
-  }
-
-  .resumo p:first-child {
-    font-size: 1.08em;
   }
 </style>

@@ -7,7 +7,7 @@
  * todo o texto, sem depender de JavaScript no cliente.
  */
 import '../styles/global.css';
-import { marca, curso, videos } from '../config/site';
+import { marca, curso, videos, idDoYoutube } from '../config/site';
 import { faq, publicoAlvo, modulos } from '../data/conteudo';
 
 interface Props {
@@ -31,6 +31,7 @@ const imagemSocial = `${base}/og.png`;
 const autor = {
   '@type': 'Person',
   name: marca.autor,
+  image: `${marca.dominio}/1768476818095.jpeg`,
   jobTitle: 'Analista de sistemas e consultor em produção documental assistida por IA',
 };
 
@@ -95,6 +96,7 @@ const dadosEstruturados = {
         name: video.titulo,
         description: video.resumo,
         embedUrl: video.embedUrl,
+        thumbnailUrl: `https://i.ytimg.com/vi/${idDoYoutube(video.embedUrl)}/maxresdefault.jpg`,
         uploadDate: new Date().toISOString().slice(0, 10),
       })),
   ],
